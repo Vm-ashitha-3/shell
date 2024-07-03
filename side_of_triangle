@@ -1,0 +1,12 @@
+echo "enter the 1st number:"
+read a
+echo "enter the 2nd number:"
+read b
+echo "enter the 3rd number:"
+read c
+if [ $((a + b)) -gt $c ] && [ $((a + c)) -gt $b ] || [ $((b + c)) -gt $a ]
+then
+        echo "the numbers $a,$b,and $c can form a triangle."
+else
+        echo "the numbers $a,$b,and $c cannot form a triangle."
+fi
