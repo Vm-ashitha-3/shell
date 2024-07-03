@@ -1,0 +1,11 @@
+echo "enter the limit"
+read l
+for ((i=0; i<=l; i++))
+do
+  if [ $((i%2)) -eq 0 ];
+  then
+      echo $i
+  fi
+done
+~
+~
