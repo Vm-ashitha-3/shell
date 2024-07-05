@@ -1,0 +1,81 @@
+# Check if the number of command-line arguments is greater than 1
+if [[ $# -gt 1 ]]; then
+    echo "syntax error <$0> [<hello.txt>]"
+    exit 1
+fi
+
+# Initialize flag variable to indicate if input redirection is performed
+flag=0
+
+# If exactly one argument is provided, redirect input from that file
+if [[ $# -eq 1 ]]; then
+    term=`tty`  # Save current terminal
+    exec < $1   # Redirect input to the file specified by the first argument
+    flag=1      # Set flag to 1 indicating input redirection is active
+fi
+
+# Initialize variables for counting lines and words
+nol=0     # Number of lines
+nowds=0   # Number of words
+
+# Loop to read each line from the input
+while read line; do
+    echo "$line"            # Print each line
+    nol=`expr $nol + 1`     # Increment line count
+
+    set $line >/dev/null    # Set positional parameters to words in the line
+    nowds=`expr $nowds + $#`  # Increment word count by number of words in the line
+done
+
+# Print the total number of lines and words counted
+echo "number of lines = $nol"
+echo "number of words = $nowds"
+
+# If input redirection was performed, restore input to the original terminal
+if [[ $flag -eq 1 ]]; then
+    exec < $term  # Restore input to original terminal
+fi
+
+exit 0  # Exit the script with success status
+
+# Check if the number of command-line arguments is greater than 1
+if [[ $# -gt 1 ]]; then
+    echo "syntax error <$0> [<hello.txt>]"
+    exit 1
+fi
+
+# Initialize flag variable to indicate if input redirection is performed
+flag=0
+
+# If exactly one argument is provided, redirect input from that file
+if [[ $# -eq 1 ]]; then
+    term=`tty`  # Save current terminal
+    exec < $1   # Redirect input to the file specified by the first argument
+    flag=1      # Set flag to 1 indicating input redirection is active
+fi
+
+# Initialize variables for counting lines and words
+nol=0     # Number of lines
+nowds=0   # Number of words
+
+# Loop to read each line from the input
+while read line; do
+    echo "$line"            # Print each line
+    nol=`expr $nol + 1`     # Increment line count
+
+    set $line >/dev/null    # Set positional parameters to words in the line
+    nowds=`expr $nowds + $#`  # Increment word count by number of words in the line
+done
+
+# Print the total number of lines and words counted
+echo "number of lines = $nol"
+echo "number of words = $nowds"
+
+# If input redirection was performed, restore input to the original terminal
+if [[ $flag -eq 1 ]]; then
+    exec < $term  # Restore input to original terminal
+fi
+
+exit 0  # Exit the script with success status
+
+
