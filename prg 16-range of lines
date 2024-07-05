@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Check if the number of command-line arguments is less than or equal to 2
+if [[ $# -le 2 ]]; then
+    echo "syntax is $0 range file"
+    exit 1
+fi
+
+# Assign first two arguments to variables n1 and n2
+n1=$1
+n2=$2
+
+# Shift the command-line arguments to the left to access the remaining arguments
+shift
+shift
+
+# Calculate the number of lines to display (range)
+n3=`expr $n2 - $n1 + 1`
+
+# Loop through each remaining argument (presumed to be files)
+while [[ $# -ne 0 ]]; do
+    echo "lines from $n1 to $n2 are:"
+
+    # Display lines from n1 to n2 of the current file
+    head -$n2 $1 | tail -$n3
+
+    # Shift to the next file argument
+    shift
+done
+
+# Exit the script
+exit
